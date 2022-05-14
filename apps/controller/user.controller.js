@@ -18,5 +18,5 @@ exports.createNewUser = async (req, res) => {
   console.log("res", result);
   if (!result) return res.status(400).send({ error: result });
 
-  return res.status(200).send("User successfully created!");
+  return res.status(200).send({ result: "User successfully created!" });
 };
