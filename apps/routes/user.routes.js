@@ -1,21 +1,9 @@
-const express = require("express");
-const jwt = require("jsonwebtoken");
-const cors = require("cors");
+module.exports = (app) => {
+  const userCont = require("../controller/user.controller");
+  let router = require("express").Router();
 
-const app = express();
-const PORT = 5000;
+  // routes for login authentication
+  router.post("/create-user", userCont.createNewUser);
 
-app.use(
-  cors({
-    origin: "*",
-    methods: "*",
-  })
-);
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-require("./app/routes/user.routes")(app, express);
-
-const server = app.listen(PORT);
-console.log(`Server started at port ${PORT}`);
-module.exports = { app, server };
+  app.use("/", router);
+};
