@@ -12,6 +12,16 @@ exports.getUserByEmail = async (email) => {
   return res;
 };
 
+exports.getUserById = async (userId) => {
+  let res = {};
+  try {
+    res = await db.get(`SELECT * FROM user where id='${userId}'`);
+  } catch (e) {
+    res = e;
+  }
+  return res;
+};
+
 exports.createNewUserModel = async (userData) => {
   const hashedNewPwd = bcrypt.hashSync(userData.password, 8);
   let sql = `INSERT INTO user (id, email, password, type) 

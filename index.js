@@ -40,6 +40,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 require("./apps/routes/user.routes")(app, express);
+require("./apps/routes/auth.routes")(app, express);
 // require("./apps/routes/api-docs.routes")(app, express);
 
 const server = app.listen(PORT);

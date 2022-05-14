@@ -9,6 +9,7 @@ module.exports = (app) => {
    *    User:
    *      type: object
    *      required:
+   *        - id
    *        - email
    *        - password
    *        - type
@@ -57,6 +58,8 @@ module.exports = (app) => {
    *        description: Successfully created new user account
    *      400:
    *        description: Failed to create new user account
+   *      500:
+   *        description: Server Error
    *
    */
   router.post("/create-user", userCont.createNewUser);

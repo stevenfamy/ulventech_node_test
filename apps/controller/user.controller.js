@@ -13,10 +13,12 @@ exports.createNewUser = async (req, res) => {
   const exist = await getUserByEmail(email);
   if (exist) return res.status(400).send({ error: "Email already exist!" });
 
+  if (password.length < 8)
+    return res.status(400).send({ error: "Password minimum 8 characters" });
+
   const result = await createNewUserModel({ email, password, type });
 
-  console.log("res", result);
-  if (!result) return res.status(400).send({ error: result });
+  if (result != true) return res.status(500).send({ error: result });
 
   return res.status(200).send({ result: "User successfully created!" });
 };
