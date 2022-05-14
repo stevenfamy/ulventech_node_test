@@ -78,6 +78,17 @@ exports.checkAuthentication = async (req, res, next) => {
   next();
 };
 
+exports.checkUserType = (type) => {
+  return async function (req, res, next) {
+    const { userId } = req;
+    const userData = await getUserById(userId);
+
+    if (userData?.type != type) return res.sendStatus(403);
+
+    next();
+  };
+};
+
 createJWToken = (userId) => {
   const rawToken = {
     selector: crypto.randomBytes(10).toString("hex"),
